@@ -7,6 +7,17 @@ function love.load()
     require "tank"
 
     myfont = love.graphics.newFont("papercuts.ttf", 160)
+    musica = love.audio.newSource("mus_zz_megalovania.ogg", "stream")
+    musica:setVolume(0.4)
+    musica:play()
+
+    pew = love.audio.newSource("pew.wav")
+    pew:setVolume(0.35)
+    exp = love.audio.newSource("explosion.wav")
+    exp:setVolume(2)
+
+    ufo = love.graphics.newImage("UFO.png")
+
     love.graphics.setFont(myfont)
     love.window.setMode(width, height)
     love.window.setTitle("tank do wtisc")
@@ -14,6 +25,7 @@ function love.load()
 
     game_over = false
     go_msg = "YOU DIED"
+    go_song = love.audio.newSource("game_over.ogg", "stream")
 end
 
 function love.update(dt)
@@ -60,6 +72,8 @@ function love.keypressed(key)
         tank.y = height/2
         controle_meteoro.bullets = {}
         tank.bullets = {}
+        musica:play()
+        go_song:stop()
     end
 end
 
